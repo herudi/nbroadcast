@@ -5,6 +5,7 @@ import {
 } from "https://deno.land/x/nhttp@0.7.5/mod.ts";
 
 const fetch_url = new URL("client", import.meta.url).href;
+// const fetch_url = "https://raw.githubusercontent.com/herudi/nbroadcast/master/client";
 
 const generateId = (len?: number) => {
   const arr = new Uint8Array((len || 40) / 2);
