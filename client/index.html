@@ -1,0 +1,53 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>NBroadcast</title>
+    <script>
+        function onGenerate() {
+            const key = document.getElementById("key");
+            fetch(`/generate-key`)
+                .then((data) => data.json())
+                .then((data) => {
+                    key.innerHTML = "KEY => " + data.key;
+                }).catch((e) => {
+                    alert(e.message || "Something went wrong");
+                });
+        }
+    </script>
+</head>
+
+<body>
+    <div style="width: 70%; margin: auto">
+        <div style="text-align: center;">
+            <h1>NBroadcast ~ Crazy fast broadcast message</h1>
+            <button onclick="onGenerate()">Generate Key</button>
+            <a href="/sample/live-news" target="_blank">Sample site</a>
+            <h3 id="key"></h3>
+        </div>
+        <h3>Usage listen message</h3>
+<pre><code class="language-js">const evtSource = new EventSource(&quot;https://nbroadcast.herudi.workers.dev/&lt;KEY&gt;/&lt;CHANNEL_NAME&gt;&quot;);
+evtSource.onmessage = function (event) {
+    const data = JSON.parse(event.data);
+    console.log(data)
+}
+</code></pre>
+    <hr/>
+    <h3>Usage send message</h3>
+<pre><code class="language-js">fetch(&quot;https://nbroadcast.herudi.workers.dev/&lt;KEY&gt;/&lt;CHANNEL_NAME&gt;&quot;, {
+    method: &quot;POST&quot;,
+    body: JSON.stringify(yourdata)
+})
+.then(data =&gt; data.json)
+.then((data) =&gt; {
+    console.log(data)    
+})
+.catch((err) =&gt; {
+    console.log(err)
+}); 
+</code></pre>
+    </div>
+</body>
+
+</html>

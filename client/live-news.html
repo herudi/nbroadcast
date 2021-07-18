@@ -1,0 +1,75 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Hello Live News</title>
+    <script>
+        const KEY = "7abf6ac11080c6b55e085cdd5ac29e3ac68596c9";
+        const CHANNEL = "news";
+        const arr = [];
+        const evtSource = new EventSource(`../${KEY}/${CHANNEL}`);
+        evtSource.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            const news = document.getElementById("news");
+            news.innerHTML = "";
+            arr.push(data);
+            const newArr = [...arr].reverse();
+            newArr.forEach((item) => {
+                news.innerHTML += `
+                    <h3>${item.title}</h3>
+                    <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+                    <hr />
+                `;
+            })
+        }
+        function onPostNews() {
+            const title = document.getElementById("title");
+            if (title.value === "") alert("Title required");
+            else {
+                fetch(`../${KEY}/${CHANNEL}`, {
+                    method: "POST",
+                    body: JSON.stringify({ title: title.value })
+                }).then(_ => {
+                    title.value = "";
+                }).catch((e) => {
+                    alert(e.message || "Something went wrong");
+                }); 
+                
+            }
+                
+        }
+    </script>
+</head>
+
+<body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div style="width: 70%; margin: auto">
+        <div>
+            <h1>Live News !</h1>
+            <label><i>Simple app live news real time. please open new browser to monitor.</i></label>
+            <br />
+            <br />
+            <input style="font-size: 16px; width: 80%; height: 40px;" placeholder="News title" id="title" />
+            <button style="height: 40px;" onclick="onPostNews()">POST</button>
+        </div>
+        <hr />
+        <div id="news"></div>
+        <div>
+            <h3>Real madrid vs MU</h3>
+            <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+            <hr />
+            <h3>Real madrid vs Barcelona</h3>
+            <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+            <hr />
+            <h3>Liverpool vs Westham</h3>
+            <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+            <hr />
+            <h3>Arsenal vs Barcelona</h3>
+            <label>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</label>
+            <hr />
+        </div>
+    </div>
+</body>
+
+</html>
