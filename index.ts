@@ -9,7 +9,7 @@ const fetch_url = new URL("client", import.meta.url).href;
 
 const generateId = (len?: number) => {
   const arr = new Uint8Array((len || 40) / 2);
-  window.crypto.getRandomValues(arr);
+  crypto.getRandomValues(arr);
   return Array.from(arr, (val) => val.toString(16).padStart(2, "0")).join("");
 };
 
