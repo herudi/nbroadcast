@@ -27,7 +27,7 @@
             <h3 id="key"></h3>
         </div>
         <h3>Usage listen message</h3>
-<pre><code class="language-js">const evtSource = new EventSource(&quot;https://nbroadcast.herudi.workers.dev/&lt;KEY&gt;/&lt;CHANNEL_NAME&gt;&quot;);
+<pre><code class="language-js">const evtSource = new EventSource(&quot;https://nbroadcast.deno.dev/&lt;KEY&gt;/&lt;CHANNEL_NAME&gt;&quot;);
 evtSource.onmessage = function (event) {
     const data = JSON.parse(event.data);
     console.log(data)
@@ -35,7 +35,7 @@ evtSource.onmessage = function (event) {
 </code></pre>
     <hr/>
     <h3>Usage send message</h3>
-<pre><code class="language-js">fetch(&quot;https://nbroadcast.herudi.workers.dev/&lt;KEY&gt;/&lt;CHANNEL_NAME&gt;&quot;, {
+<pre><code class="language-js">fetch(&quot;https://nbroadcast.deno.dev/&lt;KEY&gt;/&lt;CHANNEL_NAME&gt;&quot;, {
     method: &quot;POST&quot;,
     body: JSON.stringify(yourdata)
 })
