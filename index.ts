@@ -3,8 +3,7 @@ import {
   NHttp,
   RequestEvent,
 } from "https://deno.land/x/nhttp@0.7.5/mod.ts";
-import { Validate } from "https://deno.land/x/nhttp@1.2.13/lib/class-validator.ts";
-console.log(Validate.toString());
+
 const fetch_url = new URL("client", import.meta.url).href;
 
 const generateId = (len?: number) => {
